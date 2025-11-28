@@ -1,11 +1,25 @@
-pipeline {
-  agent {
-    docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+//pipeline {
+  //agent {
+    //docker {
+      //image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      //args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+    //}
+  //}
+agent{
+        label "jenkins-agent"
     }
-  }
+    tools {
+        jdk 'Java11'
+        maven 'Maven3'
+    }
+
   stages {
+stage("Cleanup Workspace"){
+            steps {
+                cleanWs()
+            }
+
+        }
     stage('Checkout') {
       steps {
         sh 'echo passed'
