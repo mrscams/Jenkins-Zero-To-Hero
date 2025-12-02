@@ -13,6 +13,20 @@ pipeline {
     //}
 
   stages {
+
+stage('Debug') {
+    steps {
+        sh '''
+            echo "Checking environment..."
+            pwd
+            ls -ltr
+            git --version || echo "GIT NOT INSTALLED"
+            mvn --version || echo "MAVEN NOT INSTALLED"
+            java --version || echo "JAVA NOT INSTALLED"
+        '''
+    }
+}
+
 //stage("Cleanup Workspace"){
   //          steps {
     //            cleanWs()
